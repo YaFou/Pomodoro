@@ -132,6 +132,11 @@ export function resume() {
 }
 
 function setTimerText(text, bigSize = false) {
-    timerText.style.fontSize = bigSize ? '125px' : '75px';
+    if (bigSize) {
+        timerText.classList.add('big')
+    } else {
+        timerText.classList.remove('big')
+    }
+
     timerText.innerText = text
 }
