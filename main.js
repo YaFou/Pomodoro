@@ -1,13 +1,19 @@
 import './app.css'
 import {start} from "./options";
 import {continueTimer, pause, resume, stop} from "./pomodoro";
-import {toggleVisibility} from "./util";
 
 document.getElementById('start-button').addEventListener('click', start)
 document.getElementById('continue-button').addEventListener('click', continueTimer)
 document.getElementById('stop-button').addEventListener('click', stop)
 document.getElementById('pause-button').addEventListener('click', pause)
 document.getElementById('resume-button').addEventListener('click', resume)
+
+/**
+ * @param {HTMLElement} element
+ */
+export function toggleVisibility(element) {
+    element.classList.toggle('hidden')
+}
 
 export function toggleView() {
     toggleVisibility(document.getElementById('options'))

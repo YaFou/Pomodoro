@@ -1,20 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@600;700&display=swap');
 
 :root {
-    --pomodoro: #be4242;
+    --pomodoro-1: #bc7c7c;
+    --pomodoro-2: #be4242;
+    --pomodoro-3: #a73939;
+    --pomodoro-4: #882d2d;
+    --short-break: #2e9db0;
+    --long-break: #2c66a9;
+    --accent-1: #fff;
+    --accent-2: #eee;
+    --accent-3: #ddd;
+    --accent-4: #ccc;
 }
 
 html, body {
     margin: 0;
     height: 100%;
     text-align: center;
+    background-color: var(--pomodoro-1);
 }
 
 body {
-    transition: background-color 1s;
-    color: white;
+    transition: background-color 3s;
+    color: var(--accent-1);
     font-family: 'Roboto', sans-serif;
-    background-color: #bc7c7c;
     font-size: 2em;
     font-weight: 600;
     display: flex;
@@ -29,8 +38,17 @@ body {
 }
 
 .timer-content {
-    font-size: 150px;
+    position: relative;
+}
+
+#timer-text {
+    position: absolute;
+    font-size: 125px;
     font-weight: 700;
+    text-transform: uppercase;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .hidden {
@@ -38,43 +56,44 @@ body {
 }
 
 .background-options {
-    background-color: #bc7c7c;
+    background-color: var(--pomodoro-1);
 }
 
 .background-pomodoro {
-    background-color: var(--pomodoro);
+    background-color: var(--pomodoro-2);
 }
 
 .background-short-break {
-    background-color: #2e9db0;
+    background-color: var(--short-break);
 }
 
 .background-long-break {
-    background-color: #2c66a9;
+    background-color: var(--long-break);
 }
 
 button {
     border-radius: 5px;
-    background-color: white;
-    color: var(--pomodoro);
+    background-color: var(--accent-1);
+    color: var(--pomodoro-2);
     padding: 10px 30px;
     font-size: 30px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    box-shadow: 0 5px 0 #eee;
+    box-shadow: 0 5px 0 var(--accent-2);
     margin: 0 10px;
     font-weight: 700;
+    outline: none;
 }
 
 button:hover {
-    background-color: #eee;
-    box-shadow: 0 5px 0 #ddd;
+    background-color: var(--accent-2);
+    box-shadow: 0 5px 0 var(--accent-3);
 }
 
 button:active {
-    background-color: #ddd;
-    box-shadow: 0 5px 0 #ccc;
+    background-color: var(--accent-3);
+    box-shadow: 0 5px 0 var(--accent-4);
 }
 
 .options-inputs {
@@ -93,18 +112,20 @@ label {
 
 input {
     border-radius: 10px;
-    border: 5px var(--pomodoro) solid;
+    border: 5px var(--pomodoro-2) solid;
     font-size: 30px;
-    padding: 5px;
-    -moz-appearance: textfield;
+    padding: 5px 15px;
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
     width: 300px;
     outline: none;
+    box-shadow: 0 5px 0 var(--pomodoro-3);
+    transition: border-color, box-shadow 0.3s;
 }
 
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+input:focus {
+    border-color: var(--pomodoro-3);
+    box-shadow: 0 5px 0 var(--pomodoro-4);
 }
 
 .footer {
@@ -119,7 +140,21 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 a {
-    color: white;
+    color: var(--accent-1);
+}
+
+#timer-circle {
+    stroke-dasharray: 1414;
+    stroke-dashoffset: 1414;
+    stroke: var(--accent-1);
+    stroke-linecap: round;
+    stroke-width: 20px;
+    transform: translate(50%, 50%);
+    transition: stroke-dashoffset 1s linear;
+}
+
+.timer-circle-container {
+    transform: rotate(-90deg) scaleY(-1);
 }
 
 @media screen and (max-width: 760px) {
