@@ -79,7 +79,7 @@ function updateTimer() {
  * @param {number} newTime
  */
 function setTime(newTime) {
-    time = newTime
+    time = newTime * 60
 }
 
 /**
