@@ -20,9 +20,21 @@ let longBreakInterval = null
 let shortBreakCount = 0
 let startTime = null
 
+function notify() {
+    audio.play()
+    const stateText = state === STATE_POMODORO ? 'focus' : state === STATE_SHORT_BREAK ? 'short break' : 'long break'
+    const notification = new Notification(`The ${stateText} is end!`, {body: 'Click to start the next step'})
+    notification.addEventListener('click', () => continueTimer())
+}
+
 function advance() {
     if (time === 0) {
-        audio.play()
+        notify();
+
+        if ('wakeLock' in navigator) {
+            navigator.wakeLock.release()
+        }
+
         setNewSequence()
         toggleVisibility(continueButton)
         toggleVisibility(pauseButton)
@@ -105,6 +117,10 @@ function setState(newState) {
 function startNewTimer() {
     updateTimer()
     interval = setInterval(advance, 1000)
+
+    if ('wakeLock' in navigator) {
+        navigator.wakeLock.request('screen')
+    }
 }
 
 export function continueTimer() {

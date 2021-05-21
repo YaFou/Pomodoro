@@ -8,6 +8,10 @@ document.getElementById('stop-button').addEventListener('click', stop)
 document.getElementById('pause-button').addEventListener('click', pause)
 document.getElementById('resume-button').addEventListener('click', resume)
 
+if (Notification.permission !== 'granted') {
+    Notification.requestPermission()
+}
+
 /**
  * @param {HTMLElement} element
  */
