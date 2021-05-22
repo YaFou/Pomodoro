@@ -1,28 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@600;700&display=swap');
 
 :root {
-    --pomodoro-1: #bc7c7c;
-    --pomodoro-2: #be4242;
-    --pomodoro-3: #a73939;
-    --pomodoro-4: #882d2d;
-    --short-break: #2e9db0;
-    --long-break: #2c66a9;
-    --accent-1: #fff;
-    --accent-2: #eee;
-    --accent-3: #ddd;
-    --accent-4: #ccc;
+    --very-dark-primary: #732525;
+    --dark-primary: #8a2727;
+    --primary: #b13939;
+    --light-primary: #ac5353;
+    --accent-1: #FFF;
+    --accent-2: #EEE;
+    --accent-3: #DDD;
+    --accent-4: #CCC;
+    --accent-5: #BBB;
+    --accent-6: #AAA;
+
+    /*COMPONENTS*/
+    --text: var(--accent-1);
+    --background-options: var(--light-primary);
+    --background-focus: var(--primary);
+    --background-short-break: #5799dd;
+    --background-long-break: #344fa4;
+    --button-background: var(--accent-1);
+    --button-text: var(--primary);
+    --button-shadow: var(--accent-2);
+    --button-hover-background: var(--accent-2);
+    --button-hover-shadow: var(--accent-3);
+    --button-active-background: var(--accent-3);
+    --button-active-shadow: var(--accent-4);
+    --input-background: var(--accent-1);
+    --input-border: var(--primary);
+    --input-shadow: var(--dark-primary);
+    --input-focus-border: var(--dark-primary);
+    --input-focus-shadow: var(--very-dark-primary);
+    --link: var(--text);
+    --circle: var(--accent-1);
+    --circle-shadow: var(--light-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --very-dark-primary: #480f0f;
+        --dark-primary: #541313;
+        --primary: #692222;
+        --light-primary: #703636;
+
+        --text: var(--accent-3);
+        --background-focus: var(--dark-primary);
+        --background-short-break: #1b4067;
+        --background-long-break: #23294f;
+        --button-text: var(--light-primary);
+        --button-background: var(--accent-3);
+        --button-shadow: var(--accent-4);
+        --button-hover-background: var(--accent-4);
+        --button-hover-shadow: var(--accent-5);
+        --button-active-background: var(--accent-5);
+        --button-active-shadow: var(--accent-6);
+        --input-background: var(--accent-3);
+        --input-border: var(--primary);
+        --input-shadow: var(--dark-primary);
+        --input-focus-border: var(--dark-primary);
+        --input-focus-shadow: var(--very-dark-primary);
+        --circle: var(--accent-3);
+    }
 }
 
 html, body {
     margin: 0;
     height: 100%;
     text-align: center;
-    background-color: var(--pomodoro-1);
+    background-color: var(--background-options);
 }
 
 body {
-    transition: background-color 3s;
-    color: var(--accent-1);
+    transition: background-color 2s;
+    color: var(--text);
     font-family: 'Roboto', sans-serif;
     font-size: 2em;
     font-weight: 600;
@@ -60,44 +109,44 @@ body {
 }
 
 .background-options {
-    background-color: var(--pomodoro-1);
+    background-color: var(--background-options);
 }
 
-.background-pomodoro {
-    background-color: var(--pomodoro-2);
+.background-focus {
+    background-color: var(--background-focus);
 }
 
 .background-short-break {
-    background-color: var(--short-break);
+    background-color: var(--background-short-break);
 }
 
 .background-long-break {
-    background-color: var(--long-break);
+    background-color: var(--background-long-break);
 }
 
 button {
     border-radius: 5px;
-    background-color: var(--accent-1);
-    color: var(--pomodoro-2);
+    background-color: var(--button-background);
+    color: var(--button-text);
     padding: 10px 30px;
     font-size: 30px;
     border: none;
     cursor: pointer;
     transition: text-shadow 0.3s, background-color 0.3s;
-    box-shadow: 0 5px 0 var(--accent-2);
+    box-shadow: 0 5px 0 var(--button-shadow);
     margin: 0 10px;
     font-weight: 700;
     outline: none;
 }
 
 button:hover {
-    background-color: var(--accent-2);
-    box-shadow: 0 5px 0 var(--accent-3);
+    background-color: var(--button-hover-background);
+    box-shadow: 0 5px 0 var(--button-hover-shadow);
 }
 
 button:active {
-    background-color: var(--accent-3);
-    box-shadow: 0 5px 0 var(--accent-4);
+    background-color: var(--button-active-background);
+    box-shadow: 0 5px 0 var(--button-active-shadow);
 }
 
 .options-inputs {
@@ -116,20 +165,21 @@ label {
 
 input {
     border-radius: 10px;
-    border: 5px var(--pomodoro-2) solid;
+    border: 5px var(--input-border) solid;
     font-size: 30px;
     padding: 5px 15px;
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
     width: 300px;
     outline: none;
-    box-shadow: 0 5px 0 var(--pomodoro-3);
+    box-shadow: 0 5px 0 var(--input-shadow);
     transition: border-color, box-shadow 0.3s;
+    background-color: var(--input-background);
 }
 
 input:focus {
-    border-color: var(--pomodoro-3);
-    box-shadow: 0 5px 0 var(--pomodoro-4);
+    border-color: var(--input-focus-border);
+    box-shadow: 0 5px 0 var(--input-focus-shadow);
 }
 
 .footer {
@@ -144,13 +194,13 @@ input:focus {
 }
 
 a {
-    color: var(--accent-1);
+    color: var(--link);
 }
 
 #timer-circle {
     stroke-dasharray: 1414;
     stroke-dashoffset: 1414;
-    stroke: var(--accent-1);
+    stroke: var(--circle);
     stroke-linecap: round;
     stroke-width: 20px;
     transform: translate(50%, 50%);
@@ -160,6 +210,8 @@ a {
 
 .timer-circle-container {
     transform: rotate(-90deg) scaleY(-1);
+    width: 520px;
+    height: 520px;
 }
 
 @media screen and (max-width: 760px) {
@@ -206,6 +258,6 @@ a {
     }
 
     50% {
-        filter: drop-shadow(0 0 10px var(--pomodoro-1));
+        filter: drop-shadow(0 0 10px var(--circle-shadow));
     }
 }

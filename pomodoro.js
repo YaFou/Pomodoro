@@ -2,7 +2,7 @@ import {getOption} from "./options";
 import sound from './alert.wav'
 import {switchBackground, toggleView, toggleVisibility} from "./main";
 
-export const STATE_POMODORO = 0
+export const STATE_FOCUS = 0
 export const STATE_SHORT_BREAK = 1
 export const STATE_LONG_BREAK = 2
 
@@ -22,22 +22,33 @@ let longBreakInterval = null
 let shortBreakCount = 0
 let startTime = null
 
-function notify() {
+function notify(lastState) {
     audio.play()
-    const stateText = state === STATE_POMODORO ? 'focus' : state === STATE_SHORT_BREAK ? 'short break' : 'long break'
-    const notification = new Notification(`The ${stateText} is end!`, {body: 'Click to start the next step'})
-    notification.addEventListener('click', () => continueTimer())
+
+    const body = lastState === STATE_FOCUS ? 'Good job! ' : '';
+    const notification = new Notification(
+        `The ${getStateName(lastState)} period is over!`,
+        {
+            body: `${body}Click to start the ${getStateName(state)} period.`,
+            icon: '/favicon.svg'
+        }
+    )
+    notification.addEventListener('click', continueTimer)
+}
+
+function getStateName(state) {
+    return state === STATE_FOCUS ? 'focus' : state === STATE_SHORT_BREAK ? 'short break' : 'long break'
 }
 
 function advance() {
     if (time === 0) {
-        notify();
-
         if ('wakeLock' in navigator) {
             navigator.wakeLock.release()
         }
 
+        const lastState = state
         setNewSequence()
+        notify(lastState);
         toggleVisibility(continueButton)
         toggleVisibility(pauseButton)
         clearInterval(interval)
@@ -53,10 +64,10 @@ function advance() {
 function setNewSequence() {
     timerCircle.style.transition = 'stroke-dashoffset 1s'
 
-    if (state !== STATE_POMODORO) {
-        setState(STATE_POMODORO)
-        setTime(getOption('pomodoro'))
-        switchBackground('pomodoro')
+    if (state !== STATE_FOCUS) {
+        setState(STATE_FOCUS)
+        setTime(getOption('focus'))
+        switchBackground('focus')
         setTimerText('Focus')
 
         return
@@ -107,7 +118,7 @@ function updateTimer() {
  * @param {number} newTime
  */
 function setTime(newTime) {
-    startTime = time = newTime
+    startTime = time = newTime * 60
 }
 
 /**
@@ -120,7 +131,6 @@ function setState(newState) {
 function startNewTimer() {
     updateTimer()
     interval = setInterval(advance, 1000)
-    console.log('wakeLock' in navigator)
 
     if ('wakeLock' in navigator) {
         navigator.wakeLock.request('screen')

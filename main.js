@@ -30,7 +30,7 @@ export function toggleView() {
 export function switchBackground(background) {
     const body = document.getElementById('body')
     body.classList.remove('background-settings')
-    body.classList.remove('background-pomodoro')
+    body.classList.remove('background-focus')
     body.classList.remove('background-short-break')
     body.classList.remove('background-long-break')
     body.classList.add(`background-${background}`)
