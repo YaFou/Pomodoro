@@ -83,7 +83,7 @@ button {
     font-size: 30px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: text-shadow 0.3s, background-color 0.3s;
     box-shadow: 0 5px 0 var(--accent-2);
     margin: 0 10px;
     font-weight: 700;
@@ -155,6 +155,7 @@ a {
     stroke-width: 20px;
     transform: translate(50%, 50%);
     transition: stroke-dashoffset 1s linear;
+    animation: 3s circle-shadow infinite;
 }
 
 .timer-circle-container {
@@ -196,5 +197,15 @@ a {
 
     .timer-circle-container {
         transform: rotate(-90deg) scaleY(-1) scale(0.7, 0.7);
+    }
+}
+
+@keyframes circle-shadow {
+    0%, 100% {
+        filter: none;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 10px var(--pomodoro-1));
     }
 }

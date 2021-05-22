@@ -1,5 +1,5 @@
 import {getOption} from "./options";
-import sound from './timer.wav'
+import sound from './alert.wav'
 import {switchBackground, toggleView, toggleVisibility} from "./main";
 
 export const STATE_POMODORO = 0
@@ -9,9 +9,11 @@ export const STATE_LONG_BREAK = 2
 const continueButton = document.getElementById('continue-button')
 const pauseButton = document.getElementById('pause-button')
 const resumeButton = document.getElementById('resume-button')
-const audio = new Audio(sound)
 const timerCircle = document.getElementById('timer-circle')
 const timerText = document.getElementById('timer-text')
+
+const audio = new Audio(sound)
+audio.volume = 0.5
 
 let time = null
 let state = null
@@ -105,7 +107,7 @@ function updateTimer() {
  * @param {number} newTime
  */
 function setTime(newTime) {
-    startTime = time = newTime * 60
+    startTime = time = newTime
 }
 
 /**
