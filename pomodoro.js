@@ -55,7 +55,7 @@ function setNewSequence() {
         setState(STATE_POMODORO)
         setTime(getOption('pomodoro'))
         switchBackground('pomodoro')
-        setTimerText('focus')
+        setTimerText('Focus')
 
         return
     }
@@ -67,7 +67,7 @@ function setNewSequence() {
         shortBreakCount = 0
         setTime(getOption('long-break'))
         switchBackground('long-break')
-        setTimerText('long break')
+        setTimerText('Long break')
 
         return
     }
@@ -75,7 +75,7 @@ function setNewSequence() {
     setState(STATE_SHORT_BREAK)
     setTime(getOption('short-break'))
     switchBackground('short-break')
-    setTimerText('short break')
+    setTimerText('Short break')
 }
 
 export function startPomodoro() {
@@ -94,7 +94,8 @@ function updateTimer() {
     const seconds = time % 3600 % 60
     const minutesText = minutes < 10 ? `0${minutes}` : minutes
     const secondsText = seconds < 10 ? `0${seconds}` : seconds
-    setTimerText(hours === 0 ? `${minutesText}:${secondsText}` : `${hours}:${minutesText}:${secondsText}`, true)
+    const text = hours === 0 ? `${minutesText}:${secondsText}` : `${hours}:${minutesText}:${secondsText}`;
+    setTimerText(text, hours === 0)
 
     const progress = time / startTime
     timerCircle.style.strokeDashoffset = (1414 - 1414 * progress).toString()
@@ -117,6 +118,7 @@ function setState(newState) {
 function startNewTimer() {
     updateTimer()
     interval = setInterval(advance, 1000)
+    console.log('wakeLock' in navigator)
 
     if ('wakeLock' in navigator) {
         navigator.wakeLock.request('screen')
@@ -133,6 +135,7 @@ export function stop() {
     toggleView()
     clearInterval(interval)
     switchBackground('options')
+    document.title = 'Pomodoro'
 }
 
 export function pause() {
@@ -155,4 +158,5 @@ function setTimerText(text, bigSize = false) {
     }
 
     timerText.innerText = text
+    document.title = 'Pomodoro - ' + text
 }
