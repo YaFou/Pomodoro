@@ -1,6 +1,7 @@
 import {getOption} from "./options";
 import sound from './alert.wav'
 import {switchBackground, toggleView, toggleVisibility} from "./main";
+import logo from './favicon.svg'
 
 export const STATE_FOCUS = 0
 export const STATE_SHORT_BREAK = 1
@@ -30,7 +31,7 @@ function notify(lastState) {
         `The ${getStateName(lastState)} period is over!`,
         {
             body: `${body}Click to start the ${getStateName(state)} period.`,
-            icon: '/favicon.svg'
+            icon: logo
         }
     )
     notification.addEventListener('click', continueTimer)
