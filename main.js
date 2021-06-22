@@ -1,5 +1,5 @@
 import './app.css'
-import {start} from "./options";
+import {initOptions, start} from "./options";
 import {continueTimer, pause, resume, stop} from "./pomodoro";
 
 document.getElementById('start-button').addEventListener('click', start)
@@ -7,6 +7,8 @@ document.getElementById('continue-button').addEventListener('click', continueTim
 document.getElementById('stop-button').addEventListener('click', stop)
 document.getElementById('pause-button').addEventListener('click', pause)
 document.getElementById('resume-button').addEventListener('click', resume)
+
+initOptions()
 
 if (Notification.permission !== 'granted') {
     Notification.requestPermission()
