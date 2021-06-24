@@ -105,7 +105,7 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .background-options {
@@ -139,6 +139,11 @@ button {
     outline: none;
 }
 
+button.small {
+    font-size: 20px;
+    padding: 7px 15px;
+}
+
 button:hover {
     background-color: var(--button-hover-background);
     box-shadow: 0 5px 0 var(--button-hover-shadow);
@@ -161,6 +166,11 @@ label {
 
 .buttons {
     margin-top: 35px;
+}
+
+.buttons.vertical > * {
+    display: block;
+    margin: 30px auto;
 }
 
 input {
